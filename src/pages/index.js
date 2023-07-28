@@ -27,6 +27,10 @@ export default function Home() {
     // convert Kelvin to Celsius, take your kelvin temp and subtract it from 273.15
     // console.log(res.data.main.temp - 273.15)
   }
+  const unixTimestampToDate = (timestamp) => {
+    return new Date(timestamp * 1000);
+  }
+
 
   return <>
 
@@ -83,12 +87,12 @@ export default function Home() {
       {weatherData && <div className="w-80 bg-gray-50 min-h-screen w-full px-32" >
         <h1 className='text-xl font-serif text-gray-600'>Description: {weatherData.weather[0].description}</h1>
         <img className='float-right w-[100px]' src={'http://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png'} />
-        <h1 className='text-xl font-serif text-gray-600 py-2'>Temperature: {weatherData.main.temp}</h1>
-        <h1 className='text-xl font-serif text-gray-600 py-2'>Minimum Temperature: {weatherData.main.temp_min}</h1>
-        <h1 className='text-xl font-serif text-gray-600 py-2'>Maximum Temperature: {weatherData.main.temp_max}</h1>
+        <h1 className='text-xl font-serif text-gray-600 py-2'>Temperature: {(parseFloat(weatherData.main.temp) - 273.15).toFixed(2)} °C</h1>
+        <h1 className='text-xl font-serif text-gray-600 py-2'>Minimum Temperature: {(parseFloat(weatherData.main.temp_min) - 273.15).toFixed(2)} °C</h1>
+        <h1 className='text-xl font-serif text-gray-600 py-2'>Maximum Temperature: {(parseFloat(weatherData.main.temp_max) - 273.15).toFixed(2)} °C</h1>
         <h1 className='text-xl font-serif text-gray-600 py-2'>Humidity: {weatherData.main.humidity}</h1>
-        <h1 className='text-xl font-serif text-gray-600 py-2'>Sunrise: {weatherData.sys.sunrise}</h1>
-        <h1 className='text-xl font-serif text-gray-600 py-2'>Sunset: {weatherData.sys.sunset}</h1>
+        <h1 className='text-xl font-serif text-gray-600 py-2'>Sunrise: {new Date(weatherData.sys.sunrise * 1000).toTimeString("en-US")}</h1>
+        <h1 className='text-xl font-serif text-gray-600 py-2'>Sunset: {new Date(weatherData.sys.sunset * 1000).toTimeString("en-US")}</h1>
         <h1 className='text-xl font-serif text-gray-600 py-2'>Country: {weatherData.sys.country}</h1>
       </div>}
 
