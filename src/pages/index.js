@@ -80,7 +80,7 @@ export default function Home() {
 
       {!weatherData ? <h1 className='text-gray-200 text-5xl font-serif'>Weather data will be shown here</h1> : ''}
 
-      {weatherData?.weatherData && <div className="w-80 bg-gray-50 min-h-screen w-full px-32" >
+      {weatherData && <div className="w-80 bg-gray-50 min-h-screen w-full px-32" >
         <h1 className='text-xl font-serif text-gray-600'>Description: {weatherData.weather[0].description}</h1>
         <img className='float-right w-[100px]' src={'http://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png'} />
         <h1 className='text-xl font-serif text-gray-600 py-2'>Temperature: {weatherData.main.temp}</h1>
